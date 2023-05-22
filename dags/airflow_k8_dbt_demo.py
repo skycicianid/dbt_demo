@@ -15,7 +15,7 @@ with DAG(
             'retries': 1,
             'retry_delay': timedelta(minutes=5)
         },
-        description='A simple tutorial DAG',
+        description='DAG to execute dbt',
         schedule_interval=timedelta(days=1),
         start_date=datetime(2022, 1, 1),
         catchup=False,
@@ -24,9 +24,9 @@ with DAG(
     dbt_run = KubernetesPodOperator(
         namespace="k8-executor",  # the new namespace you've created in the Workload Identity creation process
         service_account_name="composer", # the new k8 service account you've created in the Workload Identity creation process
-        image="eu.gcr.io/rocketech-de-pgcp-sandbox/airflow-k8-dbt-demo:1.0.1",
+        image="eu.gcr.io/skyita-da-architects-sandbox/airflow-k8-dbt-demo:1.0.0",
         cmds=["bash", "-cx"],
-        arguments=["dbt run --project-dir dbt_k8_demo"],
+        arguments=["dbt run --project-dir dbt_bg_foundation"],
         labels={"foo": "bar"},
         name="dbt-run-k8",
         task_id="run_dbt_job_on_k8_demo",
