@@ -1,0 +1,32 @@
+version: 2
+
+sources:
+  - name: dciciani
+    tables:
+      - name: customers
+        description: 'Customers raw dataset'
+        columns:
+          - name: id
+            description: customer identifier
+            tests:
+              - unique
+              - not_null
+          - name: first_name
+          - name: last_name
+
+      - name: orders
+        description: 'Order raw dataset'
+        columns:
+          - name: id
+            description: order identifier
+            tests:
+              - unique              
+              - not_null
+
+          - name: user_id
+          - name: order_date
+          - name: status
+        loaded_at_field: _etl_loaded_at
+        freshness:
+          warn_after: {count: 12, period: hour}
+          error_after: {count: 24, period: hour}

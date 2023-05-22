@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: dciciani
+    tables:
+      - name: payments
+        description: Raw of stripe payments data
+        columns:
+          - name: ID
+          - name: ORDERID
+          - name: PAYMENTMETHOD
+          - name: STATUS
+          - name: AMOUNT
+          - name: CREATED
