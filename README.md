@@ -1,2 +1,2 @@
 # dbt_demo
-Demo of dbt functionality over Big Query
+Demo of dbt functionalities over Big Query
