@@ -12,3 +12,13 @@ sources:
           - name: STATUS
           - name: AMOUNT
           - name: CREATED
+
+models:
+  - name: stg_payments
+    description: Staged payments data from our stripe source.
+    columns: 
+      - name: payment_id
+        description: The primary key for customers.
+        tests:
+          - unique
+          - not_null

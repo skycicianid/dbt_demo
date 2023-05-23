@@ -8,11 +8,11 @@ models:
         description: The primary key for customers.
         tests:
           - unique:
+              # configuration on basic test
               config:
-                severity: warn
+                severity: warn 
                 error_if: ">30"
                 warn_if: ">10"
-                where: "order_date > '2018-03-01'"
                 store_failure: true
           - not_null
           - relationships:
@@ -22,9 +22,11 @@ models:
         tests:
           - length:
               len: 2
+
   - name: fct_orders
     description: Fact orders data from our jaffle shop app.
     tests:
+      # using dbt_utils test package
       - dbt_utils.expression_is_true:
           expression: "amount > 5"
     columns: 
@@ -39,8 +41,10 @@ models:
       - name: amount
         description: Dollars spents on orders
         tests:
+          # data quality check using "dbt_expectation" package
           - dbt_expectations.expect_column_values_to_be_between:
-              min_value: 5
-              row_condition: "order_id is not null"
-              strickly: True 
-      
+              min_value: 0
+              max_value: 15
+              row_condition: "order_id is not null" 
+          - dbt_expectations.expect_column_values_to_be_of_type: 
+              column_type: float
