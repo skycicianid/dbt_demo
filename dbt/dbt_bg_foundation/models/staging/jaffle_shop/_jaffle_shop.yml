@@ -50,6 +50,7 @@ models:
           - unique
           - not_null
       - name: status
+        # Load external docs from a markdown files.
         description: "{{ doc('order_status') }}"
         tests:
           - accepted_values:
@@ -60,6 +61,7 @@ models:
                 - return_pending
                 - placed
       - name: customer_id
+        ### test su Foreingn Key
         description: Foreign key to stg_customers.customer_id
         tests:
           - relationships:
